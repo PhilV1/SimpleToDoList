@@ -1,10 +1,12 @@
-import Button from '../utilities/Button'
-
 function Searchbar() {
   return (
     <div className="flex justify-center">
-      <input type="text" className="inline-block" />
-      <Button>ADD</Button>
+      <form action="">
+        <input type="text" id="createToDo" />
+        <button type="submit" className="bg-gray-600">
+          Create ToDo
+        </button>
+      </form>
     </div>
   )
 }
