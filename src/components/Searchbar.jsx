@@ -17,6 +17,10 @@ function Searchbar() {
     setTerm(e.target.value)
   }
 
+  const handleDelete = (itemId) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== itemId))
+  }
+
   return (
     <div className="flex flex-col items-center gap-2">
       <form onSubmit={handleSubmit} className="w-[300px] ">
@@ -38,7 +42,9 @@ function Searchbar() {
       </form>
       <ul className="taskList ">
         {todos.map((todo) => (
-          <ListItem key={todo.id}>{todo.text}</ListItem>
+          <ListItem key={todo.id} id={todo.id} onDelete={handleDelete}>
+            {todo.text}
+          </ListItem>
         ))}
       </ul>
     </div>
