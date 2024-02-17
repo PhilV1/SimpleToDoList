@@ -34,7 +34,7 @@ function Searchbar() {
           />
           <button
             type="submit"
-            className="bg-gray-600 text-white px-2 rounded-md"
+            className="bg-gray-600 text-white px-2 rounded-md hover:bg-green-600 easw-in-out duration-300"
           >
             Create
           </button>
