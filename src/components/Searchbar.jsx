@@ -31,6 +31,7 @@ function Searchbar() {
             onChange={handleChange}
             value={term}
             className="rounded-md px-2 w-full mr-2"
+            placeholder="Create a new task..."
           />
           <button
             type="submit"
