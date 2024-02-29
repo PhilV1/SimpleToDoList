@@ -44,7 +44,7 @@ function Searchbar() {
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <form onSubmit={handleSubmit} className="w-[300px] ">
+      <form onSubmit={handleSubmit} className="w-[20rem] ">
         <div className="flex justify-between">
           <input
             type="text"
