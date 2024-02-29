@@ -1,25 +1,35 @@
-import { useState } from 'react'
-import ListItem from '../utilities/ListItem'
+import { useEffect, useState } from 'react';
+import ListItem from './ListItem';
 
 function Searchbar() {
-  const [term, setTerm] = useState('')
-  const [todos, setTodos] = useState([])
+  const [term, setTerm] = useState('');
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const storedTask = localStorage.getItem('Task');
+    if (storedTask) {
+      setTodos(JSON.parse(storedTask));
+    }
+  }, []);
 
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    const newTodo = { id: todos.length + 1, text: term }
-    setTodos([...todos, newTodo])
-    setTerm('')
+    const newTodo = { id: todos.length + 1, text: term };
+    setTodos([...todos, newTodo]);
+    localStorage.setItem('Task', JSON.stringify([...todos, newTodo]));
+    setTerm('');
   }
 
   function handleChange(e) {
-    setTerm(e.target.value)
+    setTerm(e.target.value);
   }
 
   const handleDelete = (itemId) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== itemId))
-  }
+    const updatedTodos = todos.filter((todo) => todo.id !== itemId);
+    setTodos(updatedTodos);
+    localStorage.setItem('Task', JSON.stringify(updatedTodos));
+  };
 
   return (
     <div className="flex flex-col items-center gap-2">
@@ -49,7 +59,7 @@ function Searchbar() {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
-export default Searchbar
+export default Searchbar;
