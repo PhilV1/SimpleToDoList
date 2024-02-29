@@ -15,7 +15,7 @@ function Searchbar() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const newTodo = { id: todos.length + 1, text: term };
+    const newTodo = { id: todos.length + 1, text: term, completed: false };
     setTodos([...todos, newTodo]);
     localStorage.setItem('Task', JSON.stringify([...todos, newTodo]));
     setTerm('');
@@ -27,6 +27,17 @@ function Searchbar() {
 
   const handleDelete = (itemId) => {
     const updatedTodos = todos.filter((todo) => todo.id !== itemId);
+    setTodos(updatedTodos);
+    localStorage.setItem('Task', JSON.stringify(updatedTodos));
+  };
+
+  const handleComplete = (itemId) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === itemId) {
+        return { ...todo, completed: !todo.completed };
+      }
+      return todo;
+    });
     setTodos(updatedTodos);
     localStorage.setItem('Task', JSON.stringify(updatedTodos));
   };
@@ -53,7 +64,13 @@ function Searchbar() {
       </form>
       <ul className="taskList ">
         {todos.map((todo) => (
-          <ListItem key={todo.id} id={todo.id} onDelete={handleDelete}>
+          <ListItem
+            key={todo.id}
+            id={todo.id}
+            onDelete={handleDelete}
+            onComplete={handleComplete}
+            active={todo.completed}
+          >
             {todo.text}
           </ListItem>
         ))}

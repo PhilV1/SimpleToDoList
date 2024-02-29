@@ -1,16 +1,14 @@
-import { useState } from 'react'
-import { FaTrash } from 'react-icons/fa'
-import { ImCheckmark } from 'react-icons/im'
+import { FaTrash } from 'react-icons/fa';
+import { ImCheckmark } from 'react-icons/im';
+import { useState } from 'react';
 
-function ListItem({ children, id, onDelete }) {
+function ListItem({ children, id, onDelete, onComplete, active }) {
   function handleClickDelete() {
-    onDelete(id)
+    onDelete(id);
   }
 
-  const [isActive, setIsActive] = useState(false)
-
-  const handleClick = () => {
-    setIsActive(!isActive)
+  function handleClickComplete() {
+    onComplete(id);
   }
 
   return (
@@ -19,7 +17,7 @@ function ListItem({ children, id, onDelete }) {
     >
       <p
         className={`${
-          isActive ? 'text-red-600 font-medium line-through ' : ''
+          active ? 'text-red-600 font-medium line-through ' : ''
         } w-[210px]  break-words`}
       >
         {children}
@@ -27,7 +25,7 @@ function ListItem({ children, id, onDelete }) {
       <div className="button-wrapper flex">
         <button
           className={` px-2 hover:text-green-600 hover:rounded-lg w-6 `}
-          onClick={handleClick}
+          onClick={handleClickComplete}
         >
           <ImCheckmark />
         </button>
@@ -39,7 +37,7 @@ function ListItem({ children, id, onDelete }) {
         </button>
       </div>
     </li>
-  )
+  );
 }
 
-export default ListItem
+export default ListItem;
