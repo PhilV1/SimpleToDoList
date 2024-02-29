@@ -2,7 +2,7 @@ import { FaTrash } from 'react-icons/fa';
 import { ImCheckmark } from 'react-icons/im';
 import { useState } from 'react';
 
-function ListItem({ children, id, onDelete, onComplete, active, edit }) {
+function ListItem({ children, id, onDelete, onComplete, active }) {
   const [editing, setEditing] = useState(false);
   const [editedText, setEditedText] = useState(children);
 
@@ -20,6 +20,7 @@ function ListItem({ children, id, onDelete, onComplete, active, edit }) {
 
   function handleTextChange(event) {
     setEditedText(event.target.value);
+    onEdit(id);
   }
 
   function handleTextBlur() {

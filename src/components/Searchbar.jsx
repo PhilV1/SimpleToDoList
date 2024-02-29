@@ -42,6 +42,17 @@ function Searchbar() {
     localStorage.setItem('Task', JSON.stringify(updatedTodos));
   };
 
+  const handleEdit = (itemId) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === itemId) {
+        return { ...todo, text: term };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+    localStorage.setItem('Task', JSON.stringify(updatedTodos));
+  };
+
   return (
     <div className="flex flex-col items-center gap-2">
       <form onSubmit={handleSubmit} className="w-[20rem] ">
@@ -70,6 +81,7 @@ function Searchbar() {
             onDelete={handleDelete}
             onComplete={handleComplete}
             active={todo.completed}
+            onEdit={handleEdit}
           >
             {todo.text}
           </ListItem>
